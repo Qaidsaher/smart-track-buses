@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 🟢 السماح بالقراءة والكتابة فقط للمستخدمين المسجلين
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+
+    // 🔴 قاعدة خاصة: بيانات المستخدمين تكون محمية، ولا يمكن تعديلها إلا من قبل نفس المستخدم
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // 🔴 قاعدة خاصة: يمكن لأي مستخدم قراءة بيانات الباصات، لكن لا يستطيع التعديل إلا المشرفون أو السائقون
+    match /buses/{busId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth.token.role in ["admin", "driver"];
+    }
+
+    // 🔴 قاعدة خاصة: يمكن للأهالي قراءة بيانات أبنائهم فقط
+    match /students/{studentId} {
+      allow read: if request.auth.token.role == "parent" && request.auth.token.childId == studentId;
+      allow write: if request.auth.token.role == "admin";
+    }
+  }
+}

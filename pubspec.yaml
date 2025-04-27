@@ -1,0 +1,41 @@
+name: smarttrack_buss
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '^3.7.2'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  firebase_core: ^3.12.1
+  firebase_auth: ^5.5.1
+  firebase_database: ^11.3.4
+  device_preview: ^1.2.0
+
+  image_picker: ^1.0.7
+  http: ^0.13.5
+  path: ^1.8.3
+  mime: ^1.0.4
+  aws_signature_v4: ^0.3.0
+  google_maps_flutter: ^2.5.0
+  geolocator: ^10.1.0
+geocoding: ^2.1.0
+dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^2.0.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo1.jpg"
+  adaptive_icon_background: "#F5EEDC"
+  adaptive_icon_foreground: "assets/images/logo1.jpg"
+
+  uses-material-design: true
+  assets:
+    - assets/fonts/TrajanPro_Bold.ttf
